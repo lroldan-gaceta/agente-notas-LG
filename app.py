@@ -37,11 +37,31 @@ if st.button("Evaluar Propuesta"):
             contexto_datos = "Aquí va tu string resumido de datos del paso anterior..."
             
             prompt = f"""
-            Eres un Agente de Inteligencia Artificial experto en Analítica de Medios y Estrategia Editorial.
-            Evalúa: Título: "{titulo_propuesto}" | Categoría: "{seccion_propuesta}".
-            Basándote en: {contexto_datos}
-            Genera el informe analítico estructurado.
-            """
+                Eres un Agente de IA experto en Ciencia de Datos Aplicada a Medios Digitales y Estrategia Editorial de Alto Rendimiento.
+
+                VALORACIÓN DE PROPUESTA ACTUAL:
+                - Título Propuesto: "{titulo_propuesto}"
+                - Sección/Categoría: "{seccion_propuesta}"
+
+                CONTEXTO HISTÓRICO COMPLETO (Dataset consolidado de 122k registros + métricas BQ):
+                {contexto_datos}
+
+                INSTRUCCIONES DE ANÁLISIS CRÍTICO:
+                1. Analiza semánticamente el Título Propuesto y compáralo con los patrones de títulos históricos más exitosos en la sección "{seccion_propuesta}".
+                2. Utiliza las métricas de Search Console (Clics, Impresiones, CTR) y Landing Pages del contexto para predecir si este título tiene el potencial de superar el CTR medio del sitio (2.27%) o si necesita optimización SEO.
+                3. Evalúa la retención potencial del lector basándote en el histórico de Tiempo de Interacción Medio por Sesión para temas similares.
+
+                FORMATO DE SALIDA EXIGIDO (Devuelve estrictamente esta estructura en Markdown, sé directo, profesional y crítico):
+
+                ### 📊 1. Score de Potencial Predictivo
+                - **Tráfico Estimado (Volumen):** [Alto / Medio / Bajo] (Justificar según impresiones históricas de la sección).
+                - **CTR Esperado (Atractivo del Título):** [Superior al 2.27% / Inferior al 2.27%] (Analizar si genera urgencia o curiosidad).
+                - **Engagement Estimado (Retención):** [Duración esperada alta o baja según tiempo de interacción histórico].
+
+                ### 💡 2. Recomendaciones Editoriales Estratégicas
+                - [Recomendación sobre la longitud, el ángulo periodístico o la inclusión de elementos multimedia para mejorar el Tiempo de Interacción según los datos históricos].
+                - [Indicar si el tema rinde mejor en formato estándar o requiere optimización para formato móvil/AMP].
+                """
             
             try:
                 response = client.models.generate_content(
