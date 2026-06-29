@@ -23,7 +23,7 @@ titulo_propuesto = st.text_input("Título de la Nota:", placeholder="Ej. El impa
 # Selector de categorías basado en tus secciones reales
 seccion_propuesta = st.selectbox(
     "Sección / Categoría:",
-    ["Economía", "Sociedad", "Opinión", "Seguridad", "Deportes"]
+    ["Economía", "Sociedad", "Opinión", "Seguridad", "Deportes", "Cultura", "Espectáculos", "LG Play", "Mundo", "Rural", "Servicios y empresas"]
 )
 
 # Botón para ejecutar el Agente
