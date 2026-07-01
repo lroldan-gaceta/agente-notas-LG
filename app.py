@@ -13,10 +13,15 @@ load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
 client = genai.Client(api_key=api_key)
 
-# 3. Función optimizada para cargar la matriz combinada generada en el entorno
+# 3. Función optimizada con ruta absoluta dinámica
 @st.cache_data
 def cargar_matriz_conocimiento():
-    ruta_matriz = "data/matriz_conocimiento_editorial.json"
+    # Encuentra la carpeta exacta donde reside este archivo app.py
+    directorio_actual = os.path.dirname(os.path.abspath(__file__))
+    
+    # Construye la ruta uniendo de forma absoluta: carpeta_de_app_py -> data -> archivo.json
+    ruta_matriz = os.path.join(directorio_actual, "data", "matriz_conocimiento_editorial.json")
+    
     if os.path.exists(ruta_matriz):
         try:
             with open(ruta_matriz, "r", encoding="utf-8") as f:
@@ -25,7 +30,8 @@ def cargar_matriz_conocimiento():
             st.error(f"Error al leer el archivo de la matriz: {e}")
             return {}
     else:
-        st.error(f"No se encontró el archivo '{ruta_matriz}'. Asegúrate de ejecutar primero el script que consolida la matriz combinada.")
+        # Esto te mostrará en la interfaz de Streamlit la ruta REAL exacta que está buscando el sistema
+        st.error(f"No se encontró el archivo en la ruta física: '{ruta_matriz}'.")
         return {}
 
 # Cargamos el diccionario dinámico de la base de conocimiento
