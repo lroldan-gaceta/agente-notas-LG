@@ -12,8 +12,6 @@ ENV/
 
 # Archivos de datos pesados (Para que no intente subir tus CSVs de 122k filas)
 *.csv
-*.jsonl
-data/
 
 # Carpetas del sistema o editores
 .ipynb_checkpoints/
