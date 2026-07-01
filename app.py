@@ -37,14 +37,17 @@ def cargar_matriz_conocimiento():
 # Cargamos el diccionario dinámico de la base de conocimiento
 matriz_secciones = cargar_matriz_conocimiento()
 
-# --- INTERFAZ WEB ---
+# --- INTERFAZ WEB MEJORADA ---
 st.set_page_config(page_title="Asistente Editorial IA", page_icon="📰", layout="centered")
 
-st.title("📰 Evaluador de Notas Predictivo")
-st.subheader("Recibe consejos editoriales basados en telemetría actual e histórica")
+st.title("📰 Evaluador de Notas")
+st.subheader("Optimiza tus títulos y valida la mejor sección para tus notas")
 
-st.write("Introduce los datos de tu propuesta para recibir un informe profundo de potencial de éxito contrastado con métricas actuales de BigQuery e históricos consolidados (2024-2025).")
-
+st.write(
+    "Introduce los datos de tu propuesta. Nuestro Agente de IA analizará la semántica del título "
+    "y la telemetría de la categoría para darte títulos alternativos y **sugerirte si es conveniente "
+    "cambiar la nota de sección** para maximizar su impacto según nuestro histórico de 122k notas."
+)
 # Cajas de entrada de datos para el usuario
 titulo_propuesto = st.text_input("Título de la Nota:", placeholder="Ej. El impacto de las nuevas tarifas de luz...")
 
@@ -78,31 +81,34 @@ Eres un Agente de IA experto en Ciencia de Datos Aplicada a Medios Digitales y E
 
 VALORACIÓN DE PROPUESTA ACTUAL DEL REDACTOR:
 - Título Propuesto: "{titulo_propuesto}"
-- Sección/Categoría: "{seccion_propuesta}"
+- Sección/Categoría Tentativa: "{seccion_propuesta}"
 
 MÉTRICAS TANGIBLES AGREGADAS DE NUESTRO ENTORNO PARA LA SECCIÓN "{seccion_propuesta}":
 {contexto_datos_json}
 
-INSTRUCCIONES DE ANÁLISIS CRÍTICO Y COMPARATIVO:
-1. **Perspectiva de Rendimiento Actual**: Utiliza los indicadores vigentes (`vistas_promedio_actual`, `iql_interaccion_promedio_actual` y `total_suscripciones_actual`) para determinar el potencial inmediato de tracción que tiene este título frente al estándar actual de producción de la categoría.
-2. **Perspectiva de Contexto Histórico General (2024-2025)**: Evalúa el comportamiento de largo plazo utilizando todas las variables históricas adjuntas. Analiza si enfoques semánticos similares requerían históricamente mayor longitud de texto (`longitud_caracteres_promedio_hist`), si el impacto de incluir videos en esa sección era crucial (`porcentaje_notas_con_video_hist`), el scroll medio alcanzado o si la polarización del sentimiento (`sentimiento_promedio_hist`) afectaba la conversión. 
-3. **Paralelismo Temporal**: Establece un análisis predictivo indicando si este tema replica un patrón cíclico exitoso del pasado o si la tendencia de consumo actual en 2026 demuestra un enfriamiento/cambio de comportamiento de los usuarios en comparación al periodo previo.
+INSTRUCCIONES DE ANÁLISIS CRÍTICO Y REUBICACIÓN TAXONÓMICA:
+1. **Auditoría de Sección/Categoría (Crucial)**: Analiza semánticamente si el Título Propuesto encaja perfectamente en "{seccion_propuesta}". Cruzando los datos históricos de scroll (`scroll_promedio_hist`), engagement (`iql_interaccion_promedio_actual`) y conversiones de esta categoría, dictamina de forma crítica si la nota debe mantenerse en "{seccion_propuesta}" o si, por el contrario, su temática suele performar con métricas significativamente más altas si se publicara en otra sección alternativa (por ejemplo: Economía vs. Servicios y empresas, o Sociedad vs. LG Play).
+2. **Perspectiva de Rendimiento**: Utiliza los indicadores vigentes y de largo plazo para predecir el impacto en tráfico orgánico, fidelidad de lectores habituales (`usuarios_fieles_loyal`) y conversiones si se conserva la configuración propuesta.
+3. **Optimización de Título**: Evalúa la urgencia, el clickbait negativo vs. el interés genuino, y la estructura SEO del título original.
 
-FORMATO DE SALIDA EXIGIDO (Devuelve estrictamente esta estructura en Markdown. Sé directo, profesional, crítico y matemático):
+FORMATO DE SALIDA EXIGIDO (Devuelve estrictamente esta estructura en Markdown. Sé directo, sumamente profesional, analítico y cuantitativo):
 
-### 📊 1. Score de Potencial Predictivo (Estado Actual)
-- **Tráfico Estimado (Volumen de Entrada):** [Alto / Medio / Bajo] (Justificar y contrastar de manera directa contra la métrica `vistas_promedio_actual`).
-- **Conversión a Suscripción:** [Alta / Media / Baja] (Estimar según la capacidad transaccional actual reflejada en `total_suscripciones_actual`).
+### 📊 1. Score de Potencial Predictivo (En Sección Tentativa)
+- **Tráfico Estimado (Volumen de Entrada):** [Alto / Medio / Bajo] (Justificar contrastando contra la métrica `vistas_promedio_actual`).
+- **Conversión a Suscripción:** [Alta / Media / Baja] (Estimar según la capacidad transaccional reflejada en `total_suscripciones_actual`).
 - **Retención Estimada de Audiencia:** [Alta / Media / Baja] (Calificar según el rendimiento de interacciones bajo `iql_interaccion_promedio_actual`).
 
-### ⏳ 2. Paralelismo y Contexto de Tendencia Histórica (2024-2025)
-- **Análisis de Variables de Largo Plazo:** [Realiza una comparación directa. Por ejemplo, analiza si el scroll histórico de la sección `scroll_promedio_hist` o el enganche por tiempo justifican estructurar la nota con mayor longitud, apoyarse fuertemente en redes según el promedio de compartidos previos, o si es un requerimiento mandatorio la inclusión de elementos multimedia/video].
-- **Evolución del Consumo:** [Explica de manera analítica si el rendimiento óptimo del pasado se ha enfriado en la actualidad o si la temática propuesta sigue manteniendo vigencia temporal].
+### 🗂️ 2. Dictamen de Sección y Taxonomía Recomendada
+- **¿Es la sección correcta?:** [**MANTENER EN SECCIÓN** / **RECOMENDACIÓN DE CAMBIO DE SECCIÓN**]
+- **Justificación Editorial:** [Explica científicamente si la temática rinde mejor aquí o si el perfil de usuario de otra sección del diario se ajusta más. Si recomiendas un cambio, especifica a qué sección exacta y por qué variables métricas, como mayor scroll medio previo o más conversiones en ese nicho].
 
-### 🎯 3. Optimización y Alternativas Editoriales
-*Escribe una breve crítica analítica sobre el enfoque gramatical del título original.*
-- **Opción A (Maximizando Descubrimiento SEO y Tráfico Orgánico):** [Propuesta alternativa de título]
-- **Opción B (Maximizando Viralidad, Interacción IQL y Conversión):** [Propuesta alternativa de título]
+### 💡 3. Paralelismo y Requerimientos de Formato
+- **Análisis de Variables de Largo Plazo:** [Analiza si el scroll histórico de la sección justifica estructurar la nota con mayor longitud, apoyarse fuertemente en redes según el promedio de compartidos previos, o si es un requerimiento mandatorio la inclusión de elementos multimedia/video debido a los históricos de la categoría].
+
+### 🎯 4. Optimización Gramatical y Títulos Alternativos
+*Escribe una breve crítica analítica sobre el enfoque del título original escrito por el redactor.*
+- **Opción A (Optimizada para Tráfico Orgánico y SEO):** [Propuesta alternativa de título manteniendo la esencia de la sección final recomendada]
+- **Opción B (Optimizada para Engagement IQL, Redes y Conversión):** [Propuesta alternativa de título de alto impacto para suscriptores]
 """
             
             try:
