@@ -16,7 +16,7 @@ client = genai.Client(api_key=api_key)
 # 3. Función optimizada para cargar la matriz combinada generada en el entorno
 @st.cache_data
 def cargar_matriz_conocimiento():
-    ruta_matriz = "matriz_conocimiento_editorial.json"
+    ruta_matriz = "data/matriz_conocimiento_editorial.json"
     if os.path.exists(ruta_matriz):
         try:
             with open(ruta_matriz, "r", encoding="utf-8") as f:
